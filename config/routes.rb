@@ -5,7 +5,17 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'users#index'
+  root 'users#index'
+
+  #devise_for :user
+  devise_for :user
+  #devise_scope :user do
+  #  get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
+  #  post 'sign_in', :to => 'devise/session#create', :as => :session
+  #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  #end
+
+  #devise_for :users, :controllers => {:registrations => "pims_devise/registrations", :sessions => "pims_devise/sessions"}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
