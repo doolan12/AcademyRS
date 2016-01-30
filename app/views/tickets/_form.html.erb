@@ -1,4 +1,4 @@
-<%= form_for(@ticket) do |f| %>
+<%= simple_form_for(@ticket) do |f| %>
   <% if @ticket.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
@@ -11,18 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :assignee_id %><br>
-    <%= f.number_field :assignee_id %>
-  </div>
+  <%= f.hidden_field :user_id , :value => current_user.id %>
+
+      <div class="field">
+        <%#= f.input :assignee_id , :collection => @support_staff %>
+        <%#= f.association :assignee %>
+
+        Assigned to - <%= @ticket.assignee.try(:name)   %>
+      </div>
   <div class="field">
     <%= f.label :company %><br>
     <%= f.text_field :company %>
@@ -32,15 +28,14 @@
     <%= f.text_field :course %>
   </div>
   <div class="field">
-    <%= f.label :operating_system_id %><br>
-    <%= f.number_field :operating_system_id %>
+    <%#= f.input :operating_system_id , :collection => [["Windows" , "Windows"] ,["Mac" , "Mac"] , ["Linux" , "Linux"]] %>
+    <%= f.association :operating_system %>
   </div>
   <div class="field">
-    <%= f.label :browser_id %><br>
-    <%= f.number_field :browser_id %>
+    <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Chrome" , "Chrome"]] %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :issue_description %><br>
     <%= f.text_area :description %>
   </div>
   <div class="actions">

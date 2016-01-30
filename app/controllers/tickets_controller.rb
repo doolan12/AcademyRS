@@ -1,11 +1,24 @@
 class TicketsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  # load_and_authorize_resource
+  before_action :set_ticket, only: [:show, :edit, :update, :destroy, :assign]
 
   # GET /tickets
   # GET /tickets.json
   def index
-    @tickets = Ticket.all
+    if can? :manage, Ticket
+      @tickets = Ticket.all
+    else
+      @tickets = current_user.tickets
+    end
+  end
+
+  def assign
+    if @ticket.update(ticket_params)
+      redirect_to tickets_path ,:notice => "Ticket assigned successfully"
+    else
+      redirect_to tickets_path ,:notice => "Ticket assigning failed"
+    end
   end
 
   # GET /tickets/1
@@ -16,6 +29,7 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
+    @support_staff = User.with_role(:support_staff)
   end
 
   # GET /tickets/1/edit
@@ -63,13 +77,13 @@ class TicketsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ticket
-      @ticket = Ticket.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ticket
+    @ticket = Ticket.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def ticket_params
-      params.require(:ticket).permit(:user_id, :status, :assignee_id, :company, :course, :operating_system_id, :browser_id, :description)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def ticket_params
+    params.require(:ticket).permit(:user_id, :status, :assignee_id, :company, :course, :operating_system_id, :browser_id, :description)
+  end
 end

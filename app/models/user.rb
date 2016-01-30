@@ -2,11 +2,21 @@ class User < ActiveRecord::Base
   rolify
   devise :database_authenticatable, :registerable, :recoverable
   has_many :tickets
-  before_create :set_encrypted_password
 
-  def set_encrypted_password
-    puts "trying to set password-------#{self.password}   ****    --->"
-    self.encrypted_password = User.new(:password => self.password).encrypted_password
+  attr_accessor :role
+
+  after_create :create_role
+
+  def create_role
+    if self.role == "manager"
+      self.add_role  :manager
+    elsif self.role == "customer"
+      self.add_role  :customer
+    elsif self.role == "support_staff"
+      self.add_role  :support_staff
+    else
+      self.add_role  :customer
+    end
   end
 
 end

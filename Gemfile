@@ -56,3 +56,8 @@ gem 'rolify'
 #authorization
 gem 'cancancan', '~> 1.10'
 
+#UI
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'simple_form'
+gem 'jquery-datatables-rails', '~> 3.3.0'
+

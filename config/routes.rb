@@ -1,19 +1,37 @@
 Rails.application.routes.draw do
-  resources :tickets
-  resources :users
+  resources :tickets do
+    member do
+      post 'assign'
+    end
+  end
+  # resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#index'
+   root 'tickets#index'
 
   #devise_for :user
-  devise_for :user
-  #devise_scope :user do
-  #  get 'sign_in', :to => 'devise/sessions#new', :as => :new_user_session
-  #  post 'sign_in', :to => 'devise/session#create', :as => :session
-  #  get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-  #end
+  # devise_for :user
+  devise_for :users, controllers: {
+      sessions: "users/sessions" ,
+      registrations: "users/registrations"
+  }
+
+  devise_scope :user do
+    # root to: "users/registrations#new"
+    post 'create_user' => "users/registrations#create_user"
+    post 'update_user' => "users/registrations#update_user"
+    #unauthenticated do
+    #  root 'users/registrations#new', as: :unauthenticated_root
+    #end
+  end
+
+  resources :users
+
+  # devise_scope :user do
+  #   root to: "users/registrations#new"
+  # end
 
   #devise_for :users, :controllers => {:registrations => "pims_devise/registrations", :sessions => "pims_devise/sessions"}
 
