@@ -35,6 +35,7 @@ class Ability
       can :manage , Ticket
     elsif user.has_role? :support_staff
       can :manage , Ticket
+      can :manage , User
     elsif user.has_role? :customer
       can :create , Ticket
       can :read , Ticket

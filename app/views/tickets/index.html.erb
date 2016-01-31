@@ -45,7 +45,7 @@
             <td><%= ticket.company %></td>
             <td><%= ticket.course %></td>
             <td><%= ticket.operating_system.try(:name) %></td>
-            <td><%= ticket.browser_id %></td>
+            <td><%= ticket.browser.try(:name) %></td>
             <td>
             <% if can? :manage , Ticket %>
 

@@ -48,7 +48,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
-
 #authentication
 gem 'devise'
 #roles
@@ -60,4 +59,5 @@ gem 'cancancan', '~> 1.10'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'jquery-datatables-rails', '~> 3.3.0'
+
 
