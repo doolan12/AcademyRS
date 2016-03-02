@@ -33,6 +33,7 @@ class Ability
       #can :manage , :all
       can :manage , User
       can :manage , Ticket
+      can :manage , "Chart"
     elsif user.has_role? :support_staff
       can :manage , Ticket
       can :manage , User

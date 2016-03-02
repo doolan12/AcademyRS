@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :tickets do
+    collection do
+      post 'filter'
+      get 'charts'
+    end
     member do
       post 'assign'
     end
@@ -27,7 +31,11 @@ Rails.application.routes.draw do
     #end
   end
 
-  resources :users
+  resources :users do 
+     collection do
+      post 'filter'
+    end
+  end
 
   # devise_scope :user do
   #   root to: "users/registrations#new"

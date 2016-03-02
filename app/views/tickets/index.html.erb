@@ -1,11 +1,32 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.datepicker').datepicker( {
+        format: 'dd/mm/yyyy'
+        }
+    );
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.datatable').dataTable({});
+  });
+</script>
 <% if flash[:notice] %>
-  <div class="alert alert-success" role="alert">
-    <%= notice %>
-  </div>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
 <% end %>
-
-
 <h3 class="text-center"> Tickets</h3>
+<div class="row">
+  <div class="col-xs-offset-2 col-xs-6">
+    <%= simple_form_for(@filter, :url => filter_tickets_path, :method => :post) do |f| %>
+        <%= f.input :from_date, :input_html => {:class => "datepicker"} %>
+        <%= f.input :to_date, :input_html => {:class => "datepicker"} %>
+        <%= f.submit "Filter" %>
+    <% end %>
+
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-offset-2 col-xs-6">
     <table class="table datatable">
@@ -20,7 +41,7 @@
         <th>Operating system</th>
         <th>Browser</th>
         <th>Assignee</th>
-        <th ></th>
+        <th></th>
       </tr>
       </thead>
 
@@ -31,31 +52,31 @@
             <td><%= ticket.created_at.strftime("%d/%m/%y") %></td>
             <td><%= ticket.user.try(:name) %></td>
             <td>
-              <% if can? :manage, Ticket  %>
+              <% if can? :manage, Ticket %>
                   <%= simple_form_for(ticket) do |f| %>
-                      <%= f.input :status , :collection => [["Resolved" ,"Resolved"] , ["Unresolved", "Unresolved"]] , label: false %>
+                      <%= f.input :status, :collection => [["Resolved", "Resolved"], ["Unresolved", "Unresolved"]], label: false %>
                       <%= f.submit %>
                   <% end %>
-              <% else  %>
+              <% else %>
                   <%= ticket.status %>
-              <% end  %>
+              <% end %>
 
             </td>
             <!--<td><%= ticket.assignee_id %></td>-->
             <td><%= ticket.company %></td>
             <td><%= ticket.course %></td>
             <td><%= ticket.operating_system.try(:name) %></td>
-            <td><%= ticket.browser.try(:name) %></td>
+            <td><%= ticket.browser_id %></td>
             <td>
-            <% if can? :manage , Ticket %>
+              <% if can? :manage, Ticket %>
 
-              <%= simple_form_for(ticket , :url => assign_ticket_path(ticket) , :method => :post) do |f| %>
-                  <%= f.input :assignee_id , :collection => User.with_all_roles(:support_staff) , label: false %>
-                  <%= f.submit %>
+                  <%= simple_form_for(ticket, :url => assign_ticket_path(ticket), :method => :post) do |f| %>
+                      <%= f.input :assignee_id, :collection => User.with_all_roles(:support_staff), label: false %>
+                      <%= f.submit %>
+                  <% end %>
+              <% else %>
+                  <%= ticket.assignee.try(:name) %>
               <% end %>
-                  <%else %>
-              <%= ticket.assignee.try(:name) %>
-            <% end %>
             </td>
 
             <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>

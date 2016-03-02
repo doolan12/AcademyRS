@@ -1,0 +1,11 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"Browser" [shape=Mrecord, label="{Browser|id :int(11)\lname :varchar(255)\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"OperatingSystem" [shape=Mrecord, label="{OperatingSystem|id :int(11)\lname :varchar(255)\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Role" [shape=Mrecord, label="{Role|id :int(11)\lname :varchar(255)\lresource_id :int(11)\lresource_type :varchar(255)\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Ticket" [shape=Mrecord, label="{Ticket|id :int(11)\luser_id :int(11)\lstatus :varchar(255)\lassignee_id :int(11)\lcompany :varchar(255)\lcourse :varchar(255)\loperating_system_id :int(11)\lbrowser_id :varchar(255)\ldescription :text\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"User" [shape=Mrecord, label="{User|id :int(11)\lname :varchar(255)\lemail :varchar(255)\lpassword :varchar(255)\lcreated_at :datetime\lupdated_at :datetime\lencrypted_password :varchar(255)\lreset_password_token :varchar(255)\lreset_password_sent_at :varchar(255)\l}"]
+	"Role" -> "User" [arrowtail=crow, arrowhead=crow, dir=both color="#2F8AD0"]
+	"Ticket" -> "Role" [arrowtail=odot, arrowhead=crow, dir=both color="#4CC3DB"]
+	"User" -> "Ticket" [arrowtail=odot, arrowhead=crow, dir=both color="#878ABE"]
+}

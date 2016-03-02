@@ -59,5 +59,12 @@ gem 'cancancan', '~> 1.10'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'jquery-datatables-rails', '~> 3.3.0'
+gem 'bootstrap-datepicker-rails'
 
+#charts
+gem "highcharts-rails"
 
+#uml
+gem 'rails-erd'
+gem 'railroady', '~> 1.4', '>= 1.4.2'
+gem 'ruby-graphviz', '~> 1.2', '>= 1.2.2'

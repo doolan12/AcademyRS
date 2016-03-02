@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable
   has_many :tickets
 
+  validates_presence_of :email , :name , :password
+
   attr_accessor :role
 
   after_create :create_role

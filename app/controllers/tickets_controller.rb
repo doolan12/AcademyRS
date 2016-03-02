@@ -3,6 +3,22 @@ class TicketsController < ApplicationController
   # load_and_authorize_resource
   before_action :set_ticket, only: [:show, :edit, :update, :destroy, :assign]
 
+  def charts
+    @chart_data = []
+    User.with_role(:support_staff).each do |user|
+    @chart_data << {:y => Ticket.where(:status => "Resolved" , :assignee_id => user.id).count, :name => user.name}
+   end
+    @support_staff = User.with_role(:support_staff).pluck(:name)
+  end
+
+  def filter
+    s = DateTime.strptime(params[:ticket][:from_date], "%d/%m/%Y")
+    e = DateTime.strptime(params[:ticket][:to_date], "%d/%m/%Y")
+    @tickets = Ticket.where("created_at > ? AND created_at < ?", s, e + 23.hours + 59.minutes).order('created_at DESC')
+
+    @filter = Ticket.new( :from_date => params[:ticket][:from_date] , :to_date => params[:ticket][:to_date] )
+    render "tickets/index"
+  end
   # GET /tickets
   # GET /tickets.json
   def index
@@ -11,6 +27,7 @@ class TicketsController < ApplicationController
     else
       @tickets = current_user.tickets
     end
+    @filter = Ticket.new( :to_date => Time.now.strftime("%d/%m/%Y") )
   end
 
   def assign

@@ -10,6 +10,8 @@ class Ticket < ActiveRecord::Base
 
   before_create :set_status
 
+  attr_accessor :from_date , :to_date
+
   def set_status
     self.status = "Unresolved"
   end

@@ -12,18 +12,18 @@
   <% end %>
 <%= f.hidden_field :id , :value => @user.id %>
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %><%= mark_required(@user, :name) %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email %><%= mark_required(@user, :email) %><br>
     <%= f.text_field :email %>
   </div>
     <div class="field">
       <%= f.input :role , collection: [["manager" , "manager"] , ["customer","customer"] , ["support_staff" , "support_staff"]]%>
     </div>
   <div class="field">
-    <%= f.label :password %><br>
+    <%= f.label :password %><%= mark_required(@user, :password) %><br>
     <%= f.text_field :password %>
   </div>
   <div class="actions">

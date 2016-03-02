@@ -1,0 +1,81 @@
+<div id="tickets_chart_container" style="min-width: 310px; height: 400px; margin: 0 auto">     </div>
+
+</div>
+<style>
+  .highcharts-tooltip span {
+    width: 200px !important;
+    overflow: auto;
+    white-space: normal !important;
+  }
+</style>
+<script>
+  $(function () {
+
+    $(document).ready(function () {
+
+      var chart_json = JSON.parse('<%= raw @chart_data.to_json %>');
+      var staff_json = JSON.parse('<%= raw @support_staff.to_json %>');
+
+      // Build the chart
+      $('#tickets_chart_container').highcharts({
+        chart: {
+          type: 'column',
+          zoomType: 'x'
+        },
+        title: {
+          text: 'Issues'
+        },
+        credits: {
+          enabled: false
+        },
+        tooltip: {
+          useHTML: true,
+          formatter: function () {
+            return '<b>' + this.point.name + ' : ' + this.point.y + '</b><br><span style="font-size: 10px;"></span>';
+          }
+        },
+        plotOptions: {
+          column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+          }
+        },
+        xAxis:{
+          type: 'Staff Members',
+          categories: staff_json,
+          labels:{
+            rotation: -90,
+            style: {
+              fontSize: '10px',
+              fontFamily: 'Verdana, sans-serif'
+            }
+          }
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: 'Number of Issues'
+          }
+        },
+        series: [{
+          name: 'Issues',
+          colorByPoint: true,
+          data: chart_json
+        }]
+      });
+
+
+
+
+//      var chart_json = JSON.parse('<%= raw @brand_data.to_json %>');
+
+
+
+
+    });
+  });
+
+
+
+
+</script>

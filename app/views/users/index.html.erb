@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.datatable').dataTable({});
+  });
+</script>
+
 <% if flash[:notice] %>
   <div class="alert alert-success" role="alert">
     <%= notice %>
@@ -7,17 +13,20 @@
 
 
 <%# if can? :read , User %>
+
 <div class="row">
   <div class="col-xs-offset-2 col-xs-6">
 
     <h3 class="text-center">Listing Users</h3>
-    <table class="table">
+    <table class="table datatable">
       <thead>
         <tr>
           <th>Name</th>
           <th>Email</th>
           <th>Password</th>
-          <th colspan="3"></th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

@@ -1,0 +1,12 @@
+digraph controllers_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|layout_by_resource\l|\l|_layout\l}"]
+	"TicketsController" [shape=Mrecord, label="{TicketsController|assign\lcreate\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\lset_ticket\lticket_params\l}"]
+	"Users::ConfirmationsController" [shape=Mrecord, label="{Users::ConfirmationsController|\l|\l|_layout\l}"]
+	"Users::OmniauthCallbacksController" [shape=Mrecord, label="{Users::OmniauthCallbacksController|\l|\l|_layout\l}"]
+	"Users::PasswordsController" [shape=Mrecord, label="{Users::PasswordsController|\l|\l|_layout\l}"]
+	"Users::RegistrationsController" [shape=Mrecord, label="{Users::RegistrationsController|after_sign_up_path_for\lcreate_user\lnew\lupdate_user\l|\l|_layout\luser_params\l}"]
+	"Users::SessionsController" [shape=Mrecord, label="{Users::SessionsController|new\l|\l|_layout\l}"]
+	"Users::UnlocksController" [shape=Mrecord, label="{Users::UnlocksController|\l|\l|_layout\l}"]
+	"UsersController" [shape=Mrecord, label="{UsersController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\lset_user\luser_params\l}"]
+}

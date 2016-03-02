@@ -29,6 +29,10 @@
        <% if can? :manage ,  User %>
            <li><a href="<%= users_path %>">Users</a></li>
        <% end %>
+       <% if can? :manage ,  "Chart" %>
+          <li><a href="<%= charts_tickets_path %>">Charts</a></li>
+      <% end %>
+
     </ul>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
