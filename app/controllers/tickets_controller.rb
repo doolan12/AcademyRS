@@ -9,6 +9,23 @@ class TicketsController < ApplicationController
     @chart_data << {:y => Ticket.where(:status => "Resolved" , :assignee_id => user.id).count, :name => user.name}
    end
     @support_staff = User.with_role(:support_staff).pluck(:name)
+    @filter = Ticket.new( :to_date => Time.now.strftime("%d/%m/%Y") )
+  end
+
+  def filter_charts
+    @chart_data = []
+    s = DateTime.strptime(params[:ticket][:from_date], "%d/%m/%Y")
+    e = DateTime.strptime(params[:ticket][:to_date], "%d/%m/%Y")
+    @tickets = Ticket.where("created_at > ? AND created_at < ?", s, e + 23.hours + 59.minutes).order('created_at DESC')
+
+    User.with_role(:support_staff).each do |user|
+      @chart_data << {:y => @tickets.where(:status => "Resolved" , :assignee_id => user.id).count, :name => user.name}
+    end
+
+    @support_staff = User.with_role(:support_staff).pluck(:name)
+
+    @filter = Ticket.new( :from_date => params[:ticket][:from_date] , :to_date => params[:ticket][:to_date] )
+    render "tickets/charts"
   end
 
   def filter

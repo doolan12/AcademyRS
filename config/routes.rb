@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     collection do
       post 'filter'
       get 'charts'
+      post 'filter_charts'
     end
     member do
       post 'assign'

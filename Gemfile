@@ -60,6 +60,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'simple_form'
 gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'bootstrap-datepicker-rails'
+gem 'frontend-generators'
 
 #charts
 gem "highcharts-rails"

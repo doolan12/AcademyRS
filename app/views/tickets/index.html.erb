@@ -79,8 +79,19 @@
               <% end %>
             </td>
 
-            <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-            <!--<td><%#= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+            <td>
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                    </a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to 'Edit', edit_ticket_path(ticket) %></li>
+                        <li><%= link_to 'Delete', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+                      </ul>
+                    </li>
+                </ul>
+            </td>
           </tr>
       <% end %>
       </tbody>
