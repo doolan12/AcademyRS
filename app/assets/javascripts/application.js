@@ -12,12 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require jquery.turbolinks
 //= require bootstrap-sprockets
 //= require dataTables/jquery.dataTables
-//= require bootstrap-datepicker
 //= require highcharts
 //= require highcharts/highcharts-more
 //= require_tree .
+//= require bootstrap-datepicker
+//= require turbolinks
 
 

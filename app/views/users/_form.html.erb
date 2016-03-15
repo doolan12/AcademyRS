@@ -1,7 +1,9 @@
-<%= simple_form_for(@user, :url => @user.new_record? ? create_user_path : update_user_path, :method => :post) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="row">
+  <div class="col-xs-offset-4 col-xs-4">
+    <%= simple_form_for(@user, :url => @user.new_record? ? create_user_path : update_user_path, :method => :post) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
       <% @user.errors.full_messages.each do |message| %>
@@ -12,21 +14,24 @@
   <% end %>
 <%= f.hidden_field :id , :value => @user.id %>
   <div class="field">
-    <%= f.label :name %><%= mark_required(@user, :name) %><br>
-    <%= f.text_field :name %>
+    <%= f.input :name , :input_html => {:class => "form-control"}%>
   </div>
   <div class="field">
-    <%= f.label :email %><%= mark_required(@user, :email) %><br>
-    <%= f.text_field :email %>
+    <%= f.input :email , :input_html => {:class => "form-control"}%>
   </div>
     <div class="field">
-      <%= f.input :role , collection: [["manager" , "manager"] , ["customer","customer"] , ["support_staff" , "support_staff"]]%>
+      <%= f.input :role , collection: [["manager" , "manager"] , ["customer","customer"] , ["support_staff" , "support_staff"]] , :input_html => {:class => "form-control"}%>
     </div>
   <div class="field">
-    <%= f.label :password %><%= mark_required(@user, :password) %><br>
-    <%= f.text_field :password %>
+    <%= f.input :password , :input_html => {:class => "form-control"}%>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <br>
+  <div class="actions text-center">
+    <%= f.submit "Submit" , :class => "btn btn-success"%>
+  </div>
+  <div class="btn-toolbar text-center">
+    <%= link_to "Back", users_path, class: "btn btn-small btn-default" %>
+    <%= link_to 'Show', @user, class: "btn btn-small btn-default" %> 
   </div>
 <% end %>
+</div>

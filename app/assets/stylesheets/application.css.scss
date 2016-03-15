@@ -13,8 +13,9 @@
  *
  *= require_tree .
  *= require dataTables/jquery.dataTables
- *= require bootstrap-datepicker3
+ *= require font-awesome
  *= require_self
+ *= require bootstrap-datepicker
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";

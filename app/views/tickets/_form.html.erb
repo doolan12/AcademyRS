@@ -1,44 +1,52 @@
-<%= simple_form_for(@ticket) do |f| %>
-  <% if @ticket.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+<div class="row">
+<div class="col-xs-offset-4 col-xs-4">
 
-      <ul>
-      <% @ticket.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <%= simple_form_for(@ticket) do |f| %>
+      <% if @ticket.errors.any? %>
+        <div id="error_explanation">
+         <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+          <ul>
+           <% @ticket.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+     <% end %>
 
   <%= f.hidden_field :user_id , :value => current_user.id %>
 
       <div class="field">
-        <%#= f.input :assignee_id , :collection => @support_staff %>
-        <%#= f.association :assignee %>
+          <%#= f.input :assignee_id , :collection => @support_staff %>
+          <%#= f.association :assignee %>
 
-        Assigned to - <%= @ticket.assignee.try(:name)   %>
-      </div>
-  <div class="field">
-    <%= f.label :company %><br>
-    <%= f.text_field :company %>
+          Assigned to - <%= @ticket.assignee.try(:name)   %>
+        </div>
+        <div class="form-group">
+          <%= f.input  :company , :input_html => {:class => "form-control"} %>
+        </div>
+        <div class="form-group">
+          <%= f.input :course , :input_html => {:class => "form-control"}%>
+        </div>
+        <div class="form-group">
+          <%#= f.input :operating_system_id , :collection => [["Windows" , "Windows"] ,["Mac" , "Mac"] , ["Linux" , "Linux"]] %>
+          <%= f.association :operating_system , :input_html => {:class => "form-control"}%>
+        </div>
+        <div class="form-group">
+          <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Chrome" , "Chrome"]] , :input_html => {:class => "form-control"}%>
+        </div>
+        <div class="form-group">
+          <%= f.input :description , :input_html => {:class => "form-control"} %>
+        </div>
+        <div class="form-actions">
+          <div class="btn-toolbar text-center">
+          <%= f.submit :Submit, :class => "btn btn-success" %>
+          </div><br>
+          <div class="btn-toolbar text-center">
+            <%= link_to "Back", tickets_path, class: "btn btn-small btn-default" %>
+            <%= link_to 'Show', @ticket, class: "btn btn-small btn-default" %> 
+          </div>
+        </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :course %><br>
-    <%= f.text_field :course %>
-  </div>
-  <div class="field">
-    <%#= f.input :operating_system_id , :collection => [["Windows" , "Windows"] ,["Mac" , "Mac"] , ["Linux" , "Linux"]] %>
-    <%= f.association :operating_system %>
-  </div>
-  <div class="field">
-    <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Chrome" , "Chrome"]] %>
-  </div>
-  <div class="field">
-    <%= f.label :issue_description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

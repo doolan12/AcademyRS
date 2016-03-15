@@ -1,44 +1,49 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-xs-offset-4 col-xs-4">
+    <h3>Ticket Details</h3>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @ticket.user.try(:name) %>
-</p>
+    <p>
+      <strong>User:</strong>
+      <%= @ticket.user.try(:name) %>
+    </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @ticket.status %>
-</p>
+    <p>
+      <strong>Status:</strong>
+      <%= @ticket.status %>
+    </p>
 
-<p>
-  <strong>Assignee:</strong>
-  <%= @ticket.assignee.try(:name) %>
-</p>
+    <p>
+     <strong>Assignee:</strong>
+    <%= @ticket.assignee.try(:name) %>
+    </p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @ticket.company %>
-</p>
+    <p>
+      <strong>Company:</strong>
+      <%= @ticket.company %>
+    </p>
 
-<p>
-  <strong>Course:</strong>
-  <%= @ticket.course %>
-</p>
+    <p>
+      <strong>Course:</strong>
+      <%= @ticket.course %>
+    </p>
 
-<p>
-  <strong>Operating system:</strong>
-  <%= @ticket.operating_system.try(:name) %>
-</p>
+    <p>
+      <strong>Operating system:</strong>
+      <%= @ticket.operating_system.try(:name) %>
+    </p>
 
-<p>
-  <strong>Browser:</strong>
-  <%= @ticket.browser_id %>
-</p>
+    <p>
+      <strong>Browser:</strong>
+      <%= @ticket.browser_id %>
+    </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @ticket.description %>
-</p>
+    <p>
+      <strong>Description:</strong>
+      <%= @ticket.description %>
+    </p>
 
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Back', tickets_path %>
+    <%= link_to 'Edit', edit_ticket_path(@ticket), class: "btn btn-small btn-default" %> 
+    <%= link_to 'Back', tickets_path, class: "btn btn-small btn-default" %>
+  </div>
+</div>
