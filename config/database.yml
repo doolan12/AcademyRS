@@ -14,7 +14,7 @@ production:
   reconnect: true
   database: academy_db
   pool: 5
-  username: cmanager_user
-  password: Billa123
+  username: root
+  password: 
   host: localhost
 
