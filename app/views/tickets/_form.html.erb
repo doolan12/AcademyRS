@@ -29,7 +29,7 @@
           <%= f.input :course , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
-          <%= f.input :operating_system_id , :collection => [["Windows" , "Windows"] ,["Mac" , "Mac"] , ["Linux" , "Linux"]] %>
+          <%= f.input :operating_system_id , :collection => [["Windows" , "Windows"] ,["Mac" , "Mac"] , ["Linux" , "Linux"]], :input_html => {:class => "form-control"} %>
           <%#= f.association :operating_system , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
