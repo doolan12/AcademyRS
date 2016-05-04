@@ -52,6 +52,7 @@
         <th>Operating system</th>
         <th>Browser</th>
         <th>Assignee</th>
+        <th>Issue Type</th>
         <th></th>
       </tr>
       </thead>
@@ -88,6 +89,9 @@
               <% else %>
                   <%= ticket.assignee.try(:name) %>
               <% end %>
+            </td>
+            <td>
+              <%= ticket.ticket_type %>
             </td>
 
             <td><%= link_to  edit_ticket_path(ticket)  do %>

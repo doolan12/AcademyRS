@@ -73,3 +73,6 @@ gem "highcharts-rails"
 gem 'rails-erd'
 gem 'railroady', '~> 1.4', '>= 1.4.2'
 gem 'ruby-graphviz', '~> 1.2', '>= 1.2.2'
+
+#browser detection
+gem 'browser'

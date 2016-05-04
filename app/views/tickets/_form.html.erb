@@ -22,6 +22,13 @@
 
           Assigned to - <%= @ticket.assignee.try(:name)   %>
         </div>
+
+        <% if can? :manage , Ticket %>
+           <div class="form-group">
+             <%= f.input :ticket_type , :collection => [["General","General"] , ["Technical", "Technical"] , ["Payment" , "Payment"] , ["Others" , "Others"]] , :input_html => {:class => "form-control"}%>
+           </div>
+         <% end %>
+         
         <div class="form-group">
           <%= f.input  :company , :input_html => {:class => "form-control"} %>
         </div>
@@ -29,11 +36,10 @@
           <%= f.input :course , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
-          <%= f.input :operating_system_id , :collection => [["Windows" , "Windows"] ,["Mac" , "Mac"] , ["Linux" , "Linux"]], :input_html => {:class => "form-control"} %>
-          <%#= f.association :operating_system , :input_html => {:class => "form-control"}%>
+          <%= f.association :operating_system , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
-          <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Chrome" , "Chrome"]] , :input_html => {:class => "form-control"}%>
+          <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Chrome" , "Chrome"], ["Firefox" , "Firefox"]] , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
           <%= f.input :description , :input_html => {:class => "form-control"} %>

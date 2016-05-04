@@ -1,1 +1,1 @@
-# The-Academy-RS
+# AcademyRS

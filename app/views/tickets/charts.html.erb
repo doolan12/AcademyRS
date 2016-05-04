@@ -72,6 +72,52 @@
           data: chart_json
         }]
       });
+
+
+ var chart_json = JSON.parse('<%= raw @ticket_type_data.to_json %>');
+      console.log(chart_json);
+      $('#tickets_type_chart_container').highcharts({
+        chart: {
+          plotBackgroundColor: null,
+          plotBorderWidth: null,
+          plotShadow: false,
+          backgroundColor:'transparent',
+          type: 'pie'
+        },
+        title: {
+          text: 'Tickets per ticket type',
+          style:{color: '#ffffff'}
+        },
+        tooltip: {
+          useHTML: true,
+          formatter: function() {
+            return '<b>'+ this.point.name +' : '+ this.point.y * 100 +'%</b><br><span style="font-size: 10px;">'+ this.point.tickets +' tickets</span>';
+          }
+        },
+        plotOptions: {
+          pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+              style: {
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#666'
+              }
+            }
+          }
+        },
+        
+        series: [{
+          name: 'Issue Type',
+          colorByPoint: true,
+          data: chart_json
+        }]
+      });
+
+
+
+
     });
   });
 
@@ -79,6 +125,7 @@
 
 
 </script>
+
 
 <div class="row">
   <div class="col-xs-offset-2 col-xs-3">
@@ -94,5 +141,6 @@
 </div>
 
 <div id="tickets_chart_container" style="min-width: 310px; height: 400px; margin: 0 auto">     </div>
+<div id="tickets_type_chart_container" style="min-width: 310px; height: 400px; margin: 0 auto">     </div>
 
 </div>

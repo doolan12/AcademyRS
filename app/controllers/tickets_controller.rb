@@ -5,11 +5,16 @@ class TicketsController < ApplicationController
 
   def charts
     @chart_data = []
+    @ticket_type_data = []
+    tickets_count = Ticket.all.count
+    ["General" , "Payment" , "Technical" , "Others"].each do |p|
+      @ticket_type_data << {:name => p ,:y => ("%.2f" % (Ticket.where(:ticket_type => p).count.to_f/tickets_count.to_f)).to_f , :tickets => Ticket.where(:ticket_type => p).count  }
+    end
     User.with_role(:support_staff).each do |user|
-    @chart_data << {:y => Ticket.where(:status => "Resolved" , :assignee_id => user.id).count, :name => user.name}
-   end
+      @chart_data << {:y => Ticket.where(:status => "Resolved" , :assignee_id => user.id).count, :name => user.name}
+    end
     @support_staff = User.with_role(:support_staff).pluck(:name)
-    @filter = Ticket.new( :to_date => Time.now.strftime("%d/%m/%Y") )
+    @filter = Ticket.new( :to_date => Time.now.strftime("%m/%d/%Y") )
   end
 
   def filter_charts
@@ -62,8 +67,31 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = Ticket.new
-    @support_staff = User.with_role(:support_staff)
+     require "browser"
+ 
+  
+     # browser = Browser.new("Some User Agent", accept_language: "en-us")
+ 
+     if browser.firefox?
+       browser_id = "Firefox"
+     elsif browser.chrome?
+       browser_id = "Chrome"
+     elsif browser.ie?
+       browser_id = "Internet Explorer"
+     elsif browser.safari?
+       browser_id = "Safari"
+     end
+ 
+     if browser.platform.linux?
+       platform = OperatingSystem.find_by_name("Linux")
+     elsif browser.platform.windows?
+       platform = OperatingSystem.find_by_name("Windows")
+     elsif browser.platform.mac?
+       platform = OperatingSystem.find_by_name("Mac")
+     end
+     browser.platform.mac?
+     @ticket = Ticket.new(:browser_id => browser_id, :operating_system => platform)
+     @support_staff = User.with_role(:support_staff )
   end
 
   # GET /tickets/1/edit
@@ -118,6 +146,6 @@ class TicketsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def ticket_params
-    params.require(:ticket).permit(:user_id, :status, :assignee_id, :company, :course, :operating_system_id, :browser_id, :description)
+    params.require(:ticket).permit(:user_id, :status, :assignee_id, :company, :course, :operating_system_id, :browser_id, :description, :ticket_type)
   end
 end
