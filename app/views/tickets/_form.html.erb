@@ -28,7 +28,7 @@
              <%= f.input :ticket_type , :collection => [["General","General"] , ["Technical", "Technical"] , ["Payment" , "Payment"] , ["Others" , "Others"]] , :input_html => {:class => "form-control"}%>
            </div>
          <% end %>
-         
+
         <div class="form-group">
           <%= f.input  :company , :input_html => {:class => "form-control"} %>
         </div>
@@ -39,7 +39,7 @@
           <%= f.association :operating_system , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
-          <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Chrome" , "Chrome"], ["Firefox" , "Firefox"]] , :input_html => {:class => "form-control"}%>
+          <%= f.input :browser_id , :collection => [["Safari","Safari"] , ["Internet Explorer", "Internet Explorer"] , ["Google Chrome" , "Google Chrome"], ["Mozilla Firefox" , "Mozilla Firefox"]] , :input_html => {:class => "form-control"}%>
         </div>
         <div class="form-group">
           <%= f.input :description , :input_html => {:class => "form-control"} %>

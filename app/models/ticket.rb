@@ -3,7 +3,7 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :operating_system
-  belongs_to :browser
+  belongs_to :web_browser
   belongs_to :assignee , :class_name => "User"
 
   validates_presence_of :company , :description , :course

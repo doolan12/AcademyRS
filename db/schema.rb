@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160504144709) do
+ActiveRecord::Schema.define(version: 20160504161341) do
 
   create_table "browsers", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -67,5 +67,11 @@ ActiveRecord::Schema.define(version: 20160504144709) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "web_browsers", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
 end
