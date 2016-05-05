@@ -73,9 +73,9 @@ class TicketsController < ApplicationController
      # browser = Browser.new("Some User Agent", accept_language: "en-us")
  
      if browser.firefox?
-       browser_id = "Firefox"
+       browser_id = "Mozilla Firefox"
      elsif browser.chrome?
-       browser_id = "Chrome"
+       browser_id = "Google Chrome"
      elsif browser.ie?
        browser_id = "Internet Explorer"
      elsif browser.safari?

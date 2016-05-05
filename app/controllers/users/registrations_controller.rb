@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to users_path , :notice => "User updated successfully"
     else
       puts @user.errors.full_messages
-      render "users/edit"
+      render "/users/registrations/edit"
     end
   end
 
