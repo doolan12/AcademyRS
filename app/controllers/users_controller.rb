@@ -10,14 +10,13 @@ class UsersController < ApplicationController
     if !(can? :manage, User)
         redirect_to tickets_path , :notice => "Not Authorized"
     end
-    logger.debug "all users ==>=="
     @users = User.all
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    logger.debug "Users show method==>"
+
   end
 
 

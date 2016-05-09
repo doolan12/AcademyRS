@@ -1,9 +1,16 @@
+
+
 class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
    prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
   # prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy, :show]
 
+  def new
+    #super
+    logger.debug "===coming here===="
+    @user = User.new
+  end
 
   def create_user
     @user = User.new(user_params)
@@ -18,6 +25,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_user
     @user = User.find_by_id(user_params[:id])
     if @user.update(user_params)
+      logger.debug "#{@user.role} ====> role"
       redirect_to users_path , :notice => "User updated successfully"
     else
       puts @user.errors.full_messages
@@ -87,3 +95,4 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
+
