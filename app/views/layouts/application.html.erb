@@ -23,7 +23,7 @@
 
     <ul class="nav navbar-nav navbar-left">
       <% if can? :read , Ticket %>
-          <li><a href="<%= tickets_path %>">Tickets</a></li>
+          <li><a href="<%= tickets_path %>">Issues</a></li>
       <% end %>
 
        <% if can? :manage ,  User %>
