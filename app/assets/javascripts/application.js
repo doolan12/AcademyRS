@@ -17,6 +17,7 @@
 //= require dataTables/jquery.dataTables
 //= require highcharts
 //= require highcharts/highcharts-more
+//= require highcharts/modules/exporting
 //= require_tree .
 //= require bootstrap-datepicker
 //= require turbolinks
